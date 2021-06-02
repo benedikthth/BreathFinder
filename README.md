@@ -4,7 +4,7 @@
 A python3 module implemented an algorithm designed to locate individual breaths within a PSG using the thoracic RIP signal.
 The algorithm was validated on a thoracic RIP signal that was sampled with 25hz sampling frequency. Currently, the algorithm is un-validated on any other sampling frequency.
 
-The result of the evaluation was that this algorithm found around $94\%$ of breaths correctly, with only $5\%$ of predictions being false positives. This algorithm was then
+The result of the evaluation was that this algorithm found around 94\$ of breaths correctly, with only 5\% of predictions being false positives. This algorithm was then
 ---
 ## Installation:
 ```console
@@ -20,14 +20,17 @@ The installation was tested on an ubuntu 20 system.
 
 ## Usage:
 
+The following use cases assume that you have loaded a thoracic RIP signal in the form of a python list into the variable `signal`, and that you stored the sampling frequency of the signal in the variable `sampling_frequency`. 
+
 ```python
 import BreathFinder as BF
 breath_locations = BF.find_breaths(signal, sampling_freuency)
-# output is a list of breaths in the format [start, duration], where start is the timestamp of the breath-start in seconds since the signal start, and duration is the duration of the breath in seconds.
+# output is a list of breaths in the format [start, duration]
+# where start is the timestamp of the breath-start in seconds since the signal start, and duration is the duration of the breath in seconds.
 # breath_locations = [[1, 2], ...]
 ```
 
-The BreathFinder run time can be estimated using the ```estimate_run_time``` function.
+The BreathFinder run time can be estimated using the `estimate_run_time` function.
 ```python
 import BreathFinder as BF
 et = BF.estimate_run_time(signal, sampling_frequency)
