@@ -4,7 +4,7 @@
 A python3 module implemented an algorithm designed to locate individual breaths within a PSG using the thoracic RIP signal.
 The algorithm was validated on a thoracic RIP signal that was sampled with 25hz sampling frequency. Currently, the algorithm is un-validated on any other sampling frequency.
 
-The result of the evaluation was that this algorithm found around 94\$ of breaths correctly, with only 5\% of predictions being false positives. This algorithm was then
+The result of the evaluation was that this algorithm found around 94\% of breaths correctly, with only 5\% of predictions being false positives. This algorithm was then
 ---
 ## Installation:
 ```console
