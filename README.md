@@ -26,7 +26,9 @@ The following use cases assume that you have loaded a thoracic RIP signal in the
 import BreathFinder as BF
 breath_locations = BF.find_breaths(signal, sampling_freuency)
 # output is a list of breaths in the format [start, duration]
-# where start is the timestamp of the breath-start in seconds since the signal start, and duration is the duration of the breath in seconds.
+# where start is the timestamp of the breath-start in seconds
+# since the signal start, and duration is the
+# duration of the breath in seconds.
 # breath_locations = [[1, 2], ...]
 ```
 
