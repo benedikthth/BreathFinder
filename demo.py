@@ -1,5 +1,3 @@
-from numpy.lib import index_tricks
-import pyedflib.edfreader as Reader
 import BreathFinder as BF
 import matplotlib.pyplot as plt
 import dill
@@ -27,7 +25,8 @@ fs = pickle['fs']
 
 # Estimate the run time.
 rte = BF.estimate_run_time(signal, fs)
-print(f'Breathfinder will take approximately {rte/60} minutes to process this {len(signal)/fs/60} minute long signal')
+print(f'''Breathfinder will take approximately {rte/60}
+minutes to process this {len(signal)/fs/60} minute long signal''')
 # Perform the breath finding procedure
 breaths = BF.find_breaths(signal, fs)
 # Define a list of alternating colors for the breath visualisation
