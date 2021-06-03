@@ -1,10 +1,11 @@
 import numpy as np
+from pandas.core.indexing import convert_from_missing_indexer_tuple
 from sklearn.linear_model import LinearRegression
 from scipy.signal import savgol_filter
 import scipy
 import math
 
-def move_overlaps(bss, rip_signal, rip_sf):
+def move_overlaps(bss, signal, fs):
     '''Remove overlaps between breaths.
 
     Args:
@@ -15,32 +16,41 @@ def move_overlaps(bss, rip_signal, rip_sf):
     Returns:
         List of breath location estimates with no overlapping regions.
     '''
-
+    print("Moving overlaps")
     new_bss = [bss[0]]
 
     for b in bss[1:]:
+        # find last breath
         lb = new_bss[-1]
+        # find current breath
         cb = b
+        # Find the overlap amount.
         ocb = get_percentage_overlap(cb, lb)
         if ocb > 0:
-            val_lb_end = rip_signal[   int(round(sum(lb[:2])*rip_sf)) ]
-            val_cb_start = rip_signal[ int(round( cb[0]*rip_sf)) ]
-            if val_lb_end < val_cb_start:
-                # last breath end is less than current breath start:
-                # set current breath start to be the end.
-                cb_end = sum(cb[:2])
-                new_cb_start = sum(lb[:2])
-                duration = cb_end - new_cb_start
-                new_bss.append([new_cb_start,duration])
-            elif val_lb_end > val_cb_start:
-                # current breath start is less than last breath end:
-                # set last breath end = current breath start
-                new_bss = new_bss[:-1]
-                new_duration = cb[0] - lb[0]
-                new_bss.append([lb[0], new_duration])
-                new_bss.append([cb[0], cb[1]])
-            else:
+            # find moment in time when overlap starts
+            overlap_start = max(lb[0], cb[0])
+            # find moment in time when overlap ends
+            overlap_end = min(sum(lb[:2]), sum(cb[:2]))
+            # extract the overlap region from the signal
+            overlap_region = signal[int(overlap_start*fs):int(overlap_end*fs)]
+            # If the region is empty, the breaths only overlap superficially
+            if len(overlap_region) == 0:
                 new_bss.append(cb)
+                continue
+            min_val_idx = np.argmax(overlap_region)
+            # find the location in time when the breaths are seperated
+            new_breath_sep = overlap_start + (min_val_idx / fs)
+            # Find new duration of last breath
+            nlbl = new_breath_sep - lb[0]
+            # new current breath start
+            ncbs = new_breath_sep
+            # new current breath length
+            ncbl = sum(cb[:2]) - new_breath_sep
+            # delete last breath from new_bss
+            new_bss = new_bss[:-1]
+            # add the new breaths
+            new_bss.append([lb[0], nlbl])
+            new_bss.append([ncbs, ncbl])
         else:
             new_bss.append(cb)
     return new_bss
