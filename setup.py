@@ -10,15 +10,15 @@ README = (HERE / "README.md").read_text()
 setup(
     name='BreathFinder',
     long_description=README,
-    packages=find_packages(include=['BreathFinder','numpy', 'sklearn', 'scipy']),
-    
+    packages=['BreathFinder'],
+    install_requires=['numpy', 'sklearn', 'scipy'],
     long_description_content_type="text/markdown",
     install_requires=[
           'numpy',
           'sklearn',
           'scipy'
     ],
-    version='0.2.1',
+    version='0.2.2',
     url="https://github.com/benedikthth/BreathFinder",
     description='''Algorithm designed to find locations of
     individual breaths in a PSG''',
@@ -26,4 +26,3 @@ setup(
     author_email="b@spock.is",
     license='MIT',
 )
-print("~~~~~~~~~~~~~~~~~~")
