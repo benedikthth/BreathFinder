@@ -1,3 +1,5 @@
+# BreathFinder
+
 ![screenshot](https://user-images.githubusercontent.com/7534594/120475771-4e89d300-c399-11eb-874a-619ffcb5b925.png)
 
 ---
@@ -8,7 +10,8 @@ The result of the evaluation was that this algorithm found around 94\% of breath
 
 ---
 
-## Installation:
+## Installation
+
 ```console
 bla@bla:~$ git clone git@github.com:benedikthth/BreathFinder.git
 
@@ -16,14 +19,15 @@ bla@bla:~$ cd BreathFinder
 
 bla@bla:~$ pip install -e .
 ```
+
 Currently, the package is in development, and is not released on PiPy.
 The installation was tested on an ubuntu 20 system.
 
-
-## Usage:
+## Usage
 
 ### Basic use case
-The following use cases assume that you have loaded a thoracic RIP signal in the form of a python list into the variable `signal`, and that you stored the sampling frequency of the signal in the variable `sampling_frequency`. 
+
+The following use cases assume that you have loaded a thoracic RIP signal in the form of a python list into the variable `signal`, and that you stored the sampling frequency of the signal in the variable `sampling_frequency`.
 
 ```python
 import BreathFinder as BF
@@ -34,21 +38,25 @@ breath_locations = BF.find_breaths(signal, sampling_freuency)
 # duration of the breath in seconds.
 # breath_locations = [[1, 2], ...]
 ```
+
 ### Run-time Estimation
+
 The BreathFinder run time can be estimated using the `estimate_run_time` function.
+
 ```python
 import BreathFinder as BF
 et = BF.estimate_run_time(signal, sampling_frequency)
 print(f'The algorithm is estimated to process this recording in {et/60} minutes')
 ```
-This is just an estimation however, the algorithm may take more, or less time to locate the breaths within the signal.
 
+This is just an estimation however, the algorithm may take more, or less time to locate the breaths within the signal.
 
 ### Parallelization
 
 BreathFinder does not support multiprocessing as part of the package.
 However, a potential workaround for that is to split the signal up into smaller segments, and process each segment individually.
 The following code is a template for how to accomplish this, but there may still be some issues associated with this approach, as currently, this package does not support multiprocessing natively.
+
 ```python
 import BreathFinder as BF
 from multiprocessing import Pool
@@ -84,8 +92,10 @@ breaths = [breath for breath_list in breaths_list_list for breath in breath_list
 breaths = BF.postprocess(breaths, signal, fs)
 # This is not tested, and if you find that there 
 # are issues with this approach, please let me know
-``` 
+```
 
 ---
+
 ## Contact information
+
 If there are any issues with the installation, running the algorithm, or general questions, please send me a message at [b@spock.is](mailto:b@spock.is?subject=Issue%20With%20BreathFinder)
