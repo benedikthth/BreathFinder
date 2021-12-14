@@ -19,6 +19,7 @@ setup(
           'scipy'
     ],
     version='0.2.1',
+    url="https://github.com/benedikthth/BreathFinder",
     description='''Algorithm designed to find locations of
     individual breaths in a PSG''',
     author='Benedikt Holm Thordarson',
@@ -26,4 +27,3 @@ setup(
     license='MIT',
 )
 print("~~~~~~~~~~~~~~~~~~")
-print(find_packages(include=['BreathFinder','numpy', 'sklearn', 'scipy']))
