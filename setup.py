@@ -18,7 +18,7 @@ setup(
           'scikit-learn',
           'scipy'
     ],
-    version='0.2.2',
+    version='0.2.3',
     url="https://github.com/benedikthth/BreathFinder",
     description='''Algorithm designed to find locations of
     individual breaths in a PSG''',
