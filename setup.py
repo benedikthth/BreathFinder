@@ -15,7 +15,7 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=[
           'numpy',
-          'sklearn',
+          'scikit-learn',
           'scipy'
     ],
     version='0.2.2',
