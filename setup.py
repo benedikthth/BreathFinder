@@ -11,7 +11,7 @@ setup(
     name='BreathFinder',
     long_description=README,
     packages=['BreathFinder'],
-    install_requires=['numpy', 'sklearn', 'scipy'],
+    install_requires=['numpy', 'scikit-learn', 'scipy'],
     long_description_content_type="text/markdown",
     install_requires=[
           'numpy',
